@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { get } from 'lodash';
 import Grid from '@material-ui/core/Grid';
+import Chip from '@material-ui/core/Chip';
 import { withStyles } from '@material-ui/core';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -34,11 +35,17 @@ class PokemonDetail extends Component {
                             src={data.sprites.front_default}/>
                     </div>
                 </Grid>
-                <Grid xs={6}>
-                    <h3 className={classes.pokemonName}>{data.name}</h3>
+                <Grid xs={6} className={classes.pane}>
+                    <h3 className={classes.pokemonName}>Abilities</h3>
+                    {data.abilities.map(item => {
+                        return <Chip label={item.ability.name} className={classes.chip} />
+                    })}
                 </Grid>
-                <Grid xs={6}>
-                    <h3 className={classes.pokemonName}>{data.name}</h3>
+                <Grid xs={6} className={classes.pane}>
+                    <h3 className={classes.pokemonName}>Moves</h3>
+                    {data.moves.map(item => {
+                        return <Chip label={item.move.name} className={classes.chip} />
+                    })}
                 </Grid>
             </Grid>
         ) : null
@@ -47,7 +54,7 @@ class PokemonDetail extends Component {
 
 const styles = {
     pokemonName: {
-        color: 'red',
+        color: '#3f51b5',
         textAlign: 'center',
         width: '100%',
         fontSize: 32,
@@ -60,6 +67,12 @@ const styles = {
     pokemonImage: {
         width: '100%',
     },
+    chip: {
+        margin: 5
+    },
+    pane: {
+        padding: 50
+    }
 }
 
 const mapStateToProps = ({ pokemonsReducer }) => ({
