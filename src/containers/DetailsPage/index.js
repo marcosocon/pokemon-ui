@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
 import { get } from 'lodash';
+
 import Grid from '@material-ui/core/Grid';
 import Chip from '@material-ui/core/Chip';
 import { withStyles } from '@material-ui/core';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
@@ -33,6 +38,16 @@ class PokemonDetail extends Component {
                             alt={`${data.name}`}
                             className={classes.pokemonImageWrapper}
                             src={data.sprites.front_default}/>
+                    </div>
+                    <div className={classes.statList}>
+                        <List>
+                            {data.stats.map(item => {
+                                return (
+                                    <ListItem>
+                                        <ListItemText className={classes.statItem} primary={item.stat.name} secondary={item.base_stat} />
+                                    </ListItem>);
+                            })}
+                        </List>
                     </div>
                 </Grid>
                 <Grid xs={6} className={classes.pane}>
@@ -72,6 +87,13 @@ const styles = {
     },
     pane: {
         padding: 50
+    },
+    statList: {
+        width: 200,
+        margin: 'auto'
+    },
+    statItem: {
+        textAlign: 'center'
     }
 }
 
