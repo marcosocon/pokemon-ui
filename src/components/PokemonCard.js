@@ -6,10 +6,6 @@ import CardMedia from '@material-ui/core/CardMedia';
 import { Link } from 'react-router-dom';
 
 class PokemonCard extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {}
-    }
 
     render() {
         const { data, classes } = this.props;
